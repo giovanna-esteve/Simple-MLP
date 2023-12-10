@@ -1,4 +1,8 @@
 
+function sigmoid(x){
+	return 1 / (1 + Math.exp(-x));
+}
+
 class NeuralNetwork{
 
 	constructor(input_nodes, hidden_nodes, output_nodes) {
@@ -15,6 +19,20 @@ class NeuralNetwork{
 		this.bias_output = new Matrix(this.output_nodes,1);
 		this.bias_hidden.randomize()
 		this.bias_output.randomize()
+	}
+
+    feedforward(input_array){
+		let inputs = Matrix.fromArray(input_array);
+
+		let hidden_layer = Matrix.multiply(this.weigths_hidden, inputs);
+		hidden_layer.add(this.bias_hidden);
+		hidden_layer.map(sigmoid); 
+
+		let output_layer = Matrix.multiply(this.weigths_output, hidden_layer);
+		output_layer.add(this.bias_output);
+		output_layer.map(sigmoid); 
+
+		return [output_layer, hidden_layer];
 	}
 
 }
