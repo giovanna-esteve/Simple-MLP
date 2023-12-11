@@ -70,4 +70,50 @@ class Matrix{
 		}
 	}
 
+	static subtract(a, b){
+		let result = new Matrix(a.rows, a.cols);
+		for(let i = 0; i < result.rows; i++){
+			for(let j = 0; j < result.cols; j++){
+				result.data[i][j] = a.data[i][j] - b.data[i][j];
+			}
+		}
+		return result;
+	}
+
+	static transpose(matrix){
+		let result = new Matrix(matrix.cols, matrix.rows);
+		for(let i = 0; i < result.rows; i++){
+			for(let j = 0; j < result.cols; j++){
+				result.data[i][j] = matrix.data[j][i];
+			}
+		}
+		return result;
+	}
+
+	static map(matrix, func){
+		let result = new Matrix(matrix.rows, matrix.cols);
+		for(let i = 0; i < result.rows; i++){
+			for(let j = 0; j < result.cols; j++){
+				result.data[i][j] = func(matrix.data[i][j])
+			}
+		}
+		return result;
+	}
+
+	multiply(n){
+		if (n instanceof Matrix){
+			for(let i = 0; i < this.rows; i++){
+				for(let j = 0; j < this.cols; j++){
+					this.data[i][j] *= n.data[i][j];
+				}
+			}
+		}else{
+			for(let i = 0; i < this.rows; i++){
+				for(let j = 0; j < this.cols; j++){
+					this.data[i][j] *= n;
+				}
+			}
+		}
+	}
+
 }
