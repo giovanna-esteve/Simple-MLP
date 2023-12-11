@@ -24,9 +24,8 @@ function setup() {
 	
 	nn.train(training_data, lr=0.1, epochs=50000);
 
-	console.log(nn.feedforward([1,0])[0].data[0]);
-	console.log(nn.feedforward([0,1])[0].data[0]);
-	console.log(nn.feedforward([0,0])[0].data[0]);
-	console.log(nn.feedforward([1,1])[0].data[0]);
-
+    console.log(nn.predict([1,0]));
+    console.log(nn.predict([0,1]));
+    console.log(nn.predict([0,0]));
+    console.log(nn.predict([1,1]));
 }

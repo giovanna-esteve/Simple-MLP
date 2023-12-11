@@ -26,6 +26,11 @@ class NeuralNetwork{
 		this.bias_output.randomize()
 	}
 
+	predict(input_array){
+		let [output, hidden] = this.feedforward(input_array);
+		return output.data[0];
+	}
+
     feedforward(input_array){
 		let inputs = Matrix.fromArray(input_array);
 
@@ -70,7 +75,7 @@ class NeuralNetwork{
 
 		for (let i = 0; i < epochs; i++){
 			let data = random(training_data);
-			
+
 			let [output, hidden] = this.feedforward(data.inputs);
 			this.backpropagation(data.inputs, data.targets, output, hidden, lr);
 		}
